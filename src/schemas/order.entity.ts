@@ -12,21 +12,21 @@ import { OrderItem } from "./orderItem.entity";
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id!: string;
 
   @Column()
-  userId: string;
+  userId!: string;
 
   @Column()
-  total: number;
+  total!: number;
 
   @Column({ type: "enum", enum: ["created", "completed"], default: "created" })
-  status: string;
+  status!: string;
 
   @OneToMany(() => OrderItem, (item) => item.order, { cascade: true })
-  items: OrderItem[];
+  items!: OrderItem[];
 
   @ManyToOne(() => User, (user) => user.orders)
   @JoinColumn({ name: "userId" })
-  user: User;
+  user!: User;
 }

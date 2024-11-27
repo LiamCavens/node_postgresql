@@ -12,21 +12,21 @@ import { Order } from "./order.entity";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn("uuid") // Automatically generates a UUID as the primary key
-  id: string;
+  id!: string;
 
   @Column({ type: "varchar", length: 255 })
-  name: string;
+  name!: string;
 
   @Column({ type: "varchar", length: 255, unique: true }) // Enforces unique constraint
-  email: string;
+  email!: string;
 
   @Column({ type: "varchar", length: 255 })
-  password: string;
+  password!: string;
 
-  @OneToOne(() => Cart, (cart) => cart.user, { cascade: true })
+  @OneToOne(() => Cart, (cart) => cart.userId, { cascade: true })
   @JoinColumn() // Specifies that this is the owning side of the relationship
-  cart: Cart;
+  cart!: Cart;
 
   @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
+  orders!: Order[];
 }

@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
@@ -9,9 +10,9 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || "node_postgres",
   // Syncronize would be set to false in production
   synchronize: true,
-  logging: false,
-  entities: ["src/entities/**/*.ts"],
-  migrations: ["src/migrations/**/*.ts"],
+  logging: true,
+  entities: [__dirname + "/../schemas/*.entity{.ts,.js}"],
+  migrations: [__dirname + "/../migrations/*{.ts,.js}"],
 });
 
 export const initializeDataSource = async () => {

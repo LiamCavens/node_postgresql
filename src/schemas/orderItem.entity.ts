@@ -10,18 +10,18 @@ import { Order } from "./order.entity";
 @Entity()
 export class OrderItem {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  id!: string;
 
   @Column()
-  productId: string;
+  productId!: string;
 
   @Column()
-  count: number;
+  count!: number;
 
   @Column()
-  price: number;
+  price!: number;
 
   @ManyToOne(() => Order, (order) => order.items)
   @JoinColumn({ name: "orderId" })
-  order: Order;
+  order!: Order;
 }

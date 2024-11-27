@@ -8,8 +8,10 @@
     "start": "node dist/server.js",
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "seedproducts": "ts-node-dev src/data/products.ts",
-    "seedusers": "ts-node-dev src/data/users.ts"
+    "typeorm": "typeorm-ts-node-commonjs -d src/config/data-source.ts",
+    "migration:generate": "npm run typeorm migration:generate -- -n",
+    "migration:run": "npm run typeorm migration:run",
+    "migration:create": "npm run typeorm migration:create -- -n"
   },
   "keywords": [],
   "author": "",

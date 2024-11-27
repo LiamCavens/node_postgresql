@@ -7,7 +7,9 @@
     "skipLibCheck": true, 
     "resolveJsonModule": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["src/**/*.ts", "src/express.d.ts", "src/config/data-source.ts"]
 }
