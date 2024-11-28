@@ -29,7 +29,7 @@ Simple overview to learning node with mongodb
 1. Clone the repository:
    ```bash
    git clone https://github.com/LiamCavens/node-postgresql.git
-   cd node-nosql
+   cd node-postgresql
     ```
 2. Install the dependencies:
     ```bash
