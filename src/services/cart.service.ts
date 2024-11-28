@@ -1,6 +1,6 @@
 import { AppDataSource } from "../config/data-source";
 import { Cart } from "../schemas/cart.entity";
-import { CartItem } from "../schemas/cartItem.entity";
+import { CartItem } from "../schemas/cart-item.entity";
 import { Product } from "../schemas/product.entity";
 import { User } from "../schemas/user.entity";
 

@@ -7,7 +7,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { User } from "./user.entity";
-import { OrderItem } from "./orderItem.entity";
+import { OrderItem } from "./order-item.entity";
 
 @Entity()
 export class Order {

@@ -37,3 +37,44 @@ export const getProductById = async (req: Request, res: Response) => {
       .json({ data: null, error: { message: "Internal server error" } });
   }
 };
+
+export const createProduct = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { title, description, price } = req.body;
+
+    // Validate input
+    if (!title || !description || typeof price !== "number") {
+      res.status(400).json({
+        data: null,
+        error: { message: "Invalid input data" },
+      });
+      return;
+    }
+
+    const productRepository = AppDataSource.getRepository(Product);
+
+    // Create a new product
+    const newProduct = productRepository.create({
+      title,
+      description,
+      price,
+    });
+
+    // Save the product to the database
+    const savedProduct = await productRepository.save(newProduct);
+
+    res.status(201).json({
+      data: savedProduct,
+      error: null,
+    });
+  } catch (error) {
+    console.error("Error creating product:", error);
+    res.status(500).json({
+      data: null,
+      error: { message: "Internal Server Error" },
+    });
+  }
+};

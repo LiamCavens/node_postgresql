@@ -1,16 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { CartItem } from "./cart-item.entity";
 
-@Entity() // Mark this class as a database entity
+@Entity()
 export class Product {
-  @PrimaryGeneratedColumn("uuid") // Automatically generates a UUID as the primary key
+  @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @Column({ type: "varchar", length: 255 }) // Product title with a max length of 255 characters
+  @Column({ type: "varchar", length: 255 })
   title!: string;
 
-  @Column({ type: "text" }) // Product description
+  @Column({ type: "varchar", length: 1000 })
   description!: string;
 
-  @Column({ type: "decimal", precision: 10, scale: 2 }) // Product price with precision and scale
+  @Column({ type: "decimal", precision: 10, scale: 2 })
   price!: number;
+
+  @OneToMany(() => CartItem, (item) => item.product)
+  items!: CartItem[];
 }

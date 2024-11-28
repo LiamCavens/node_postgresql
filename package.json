@@ -11,7 +11,8 @@
     "typeorm": "typeorm-ts-node-commonjs -d src/config/data-source.ts",
     "migration:generate": "npm run typeorm migration:generate -- -n",
     "migration:run": "npm run typeorm migration:run",
-    "migration:create": "npm run typeorm migration:create -- -n"
+    "migration:create": "npm run typeorm migration:create -- -n",
+    "seeddb": "ts-node src/data/products.ts && ts-node src/data/users.ts"
   },
   "keywords": [],
   "author": "",

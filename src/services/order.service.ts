@@ -1,6 +1,6 @@
 import { Order } from "../schemas/order.entity";
 import { Cart } from "../schemas/cart.entity";
-import { CartItem } from "../schemas/cartItem.entity";
+import { CartItem } from "../schemas/cart-item.entity";
 import { Product } from "../schemas/product.entity";
 import { AppDataSource } from "../config/data-source"; // TypeORM Data Source
 import { createOrder as createOrderRepo } from "../repositories/order.repository";

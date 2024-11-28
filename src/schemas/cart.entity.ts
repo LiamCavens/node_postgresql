@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { CartItem } from "./cartItem.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from "typeorm";
+import { CartItem } from "./cart-item.entity";
+import { User } from "./user.entity";
+
 @Entity()
 export class Cart {
   @PrimaryGeneratedColumn("uuid")
@@ -8,9 +10,12 @@ export class Cart {
   @Column({ type: "uuid" })
   userId!: string;
 
-  @OneToMany(() => CartItem, (cartItem) => cartItem.cart, { cascade: true })
+  @Column({ default: false })
+  isDeleted!: boolean;
+
+  @OneToMany(() => CartItem, (item) => item.cart, { cascade: true })
   items!: CartItem[];
 
-  @Column({ type: "boolean", default: false })
-  isDeleted!: boolean;
+  @OneToOne(() => User, (user: User) => user.cart, { onDelete: "CASCADE" })
+  user!: User;
 }

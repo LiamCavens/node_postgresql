@@ -28,7 +28,7 @@ Simple overview to learning node with mongodb
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/LiamCavens/node-nosql.git
+   git clone https://github.com/LiamCavens/node-postgresql.git
    cd node-nosql
     ```
 2. Install the dependencies:
@@ -40,19 +40,27 @@ Simple overview to learning node with mongodb
     - Create a new file `.env` in the root directory.
     - Add these environment variables:
       ```env
-      MONGO_URI=mongodb://localhost:27017/database-no-sql
-      MONGO_URI_TEST=mongodb://localhost:27017/database-no-sql-test
-      PORT=8000
+      DB_HOST=localhost
+      DB_PORT=5432
+      DB_USER=postgres
+      DB_PASSWORD=yourpassword
+      DB_NAME=node_postgresql
       ```
 
-4. Start MongoDB (locally or connect to your MongoDB Atlas instance).
+4. Start Postgres server and create database
 
-5. build the project:
+5. Run the project:
     ```bash
-    npm run build
+    npm run dev
     ```
 
-6. run the project:
+6. Add Products (Or Seed (which is currently broken))
     ```bash
-    npm start
+    POST http://localhost:8000/api/products
+
+    {
+        "title": "Product Name",
+        "description": "Product Description",
+        "price": 100
+    }
     ```
