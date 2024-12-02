@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import logger from "../utils/logger";
 import { AppDataSource } from "../config/data-source";
 import { Product } from "../schemas/product.entity";
 
@@ -9,7 +10,7 @@ export const getProducts = async (req: Request, res: Response) => {
     const products = await productRepository.find(); // Fetch all products
     res.status(200).json({ data: products, error: null });
   } catch (error) {
-    console.error("Error fetching products:", error);
+    logger.error("Error fetching products:", error);
     res
       .status(500)
       .json({ data: null, error: { message: "Internal server error" } });
@@ -31,7 +32,7 @@ export const getProductById = async (req: Request, res: Response) => {
 
     res.status(200).json({ data: product, error: null });
   } catch (error) {
-    console.error("Error fetching product:", error);
+    logger.error("Error fetching product:", error);
     res
       .status(500)
       .json({ data: null, error: { message: "Internal server error" } });
@@ -71,7 +72,7 @@ export const createProduct = async (
       error: null,
     });
   } catch (error) {
-    console.error("Error creating product:", error);
+    logger.error("Error creating product:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server Error" },

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import logger from "../utils/logger";
 import { AppDataSource } from "../config/data-source";
 import { User } from "../schemas/user.entity";
 
@@ -36,11 +37,12 @@ export const getUserProfile = async (
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
       error: null,
     });
   } catch (error) {
-    console.error("Error fetching user profile:", error);
+    logger.error("Error fetching user profile:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server error" },

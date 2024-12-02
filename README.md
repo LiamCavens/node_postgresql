@@ -18,7 +18,7 @@ Simple overview to learning node with mongodb
 ## Tech Stack
 
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB with Mongoose
+- **Database**: Postgresql
 - **Language**: TypeScript
 - **Tools**: Git, Nodemon, Jest (optional for testing)
 
@@ -54,8 +54,10 @@ Simple overview to learning node with mongodb
     npm run dev
     ```
 
-6. Add Products (Or Seed (which is currently broken))
+6. Add Products (Or Seed)
     ```bash
+    npm run seeddb
+
     POST http://localhost:8000/api/products
 
     {

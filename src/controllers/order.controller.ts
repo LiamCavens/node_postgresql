@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import logger from "../utils/logger";
 import {
   createOrderFromCart,
   getOrdersForUser,
@@ -52,7 +53,7 @@ export const createOrder = async (
       error: null,
     });
   } catch (error) {
-    console.error("Error creating order:", error);
+    logger.error("Error creating order:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server error" },
@@ -93,7 +94,7 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
       error: null,
     });
   } catch (error) {
-    console.error("Error fetching orders:", error);
+    logger.error("Error fetching orders:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server error" },
