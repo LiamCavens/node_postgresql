@@ -1,46 +1,38 @@
 import { AppDataSource } from "../config/data-source";
 import { Product } from "../schemas/product.entity";
 
+const products = [
+  { title: "Book", description: "A very interesting book", price: 100 },
+  {
+    title: "Laptop",
+    description: "A powerful laptop for developers",
+    price: 1500,
+  },
+  {
+    title: "Phone",
+    description: "A smartphone with great camera features",
+    price: 800,
+  },
+];
+
 const seedProducts = async () => {
   try {
-    const products = [
-      {
-        title: "Book",
-        description: "A very interesting book",
-        price: 100,
-      },
-      {
-        title: "Laptop",
-        description: "A powerful laptop for developers",
-        price: 1500,
-      },
-      {
-        title: "Phone",
-        description: "A smartphone with great camera features",
-        price: 800,
-      },
-    ];
-
+    console.log("Initializing database connection...");
     await AppDataSource.initialize();
-    console.log("Data Source has been initialized!");
 
-    const queryRunner = AppDataSource.createQueryRunner();
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
+    console.log("Clearing existing products...");
+    await AppDataSource.query('TRUNCATE TABLE "product" CASCADE');
 
-    // Clear existing products and dependent records
-    await queryRunner.query('TRUNCATE TABLE "product" CASCADE');
-
+    console.log("Seeding products...");
     const productRepository = AppDataSource.getRepository(Product);
-    const productEntities = productRepository.create(products);
-    await productRepository.save(productEntities);
+    await productRepository.save(products);
 
-    await queryRunner.commitTransaction();
-    console.log("Products seeded successfully");
+    console.log("Products seeded successfully.");
   } catch (error) {
     console.error("Error seeding products:", error);
   } finally {
     await AppDataSource.destroy();
+    console.log("Database connection closed.");
   }
 };
 

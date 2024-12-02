@@ -4,6 +4,7 @@ import { authenticate } from "./middleware/auth.middleware";
 import productRoutes from "./routes/productRoutes";
 import cartRoutes from "./routes/cartRoutes";
 import orderRoutes from "./routes/orderRoutes";
+import authRoutes from "./routes/authRoutes";
 
 import { AppDataSource } from "./config/data-source";
 
@@ -26,6 +27,7 @@ AppDataSource.initialize()
 app.use("/api/products", authenticate, productRoutes);
 app.use("/api/profile/cart", authenticate, cartRoutes);
 app.use("/api/orders", authenticate, orderRoutes);
+app.use("/api/auth", authenticate, authRoutes);
 
 // Error Handling Middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

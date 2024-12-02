@@ -103,12 +103,12 @@ export const clearCartController = async (
   res: Response
 ): Promise<void> => {
   try {
-    const userId = req.userId as string;
+    const { userId } = req.params;
 
     if (!userId) {
-      res.status(403).json({
+      res.status(400).json({
         data: null,
-        error: { message: "You must be an authorized user" },
+        error: { message: "User ID is required" },
       });
       return;
     }
@@ -120,7 +120,6 @@ export const clearCartController = async (
       error: null,
     });
   } catch (error) {
-    console.error("Error clearing cart:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server error" },
