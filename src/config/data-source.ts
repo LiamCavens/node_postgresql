@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
+import logger from "../utils/logger";
 dotenv.config();
 
 export const AppDataSource = new DataSource({
@@ -20,8 +21,8 @@ export const AppDataSource = new DataSource({
 export const initializeDataSource = async () => {
   try {
     await AppDataSource.initialize();
-    console.log("PostgreSQL connected!");
+    logger.info("PostgreSQL connected!");
   } catch (error) {
-    console.error("Error during Data Source initialization:", error);
+    logger.info("Error during Data Source initialization:", error);
   }
 };

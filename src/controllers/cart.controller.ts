@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import logger from "../utils/logger";
 import {
   getOrCreateCart,
   updateCart,
@@ -40,7 +41,7 @@ export const getCart = async (req: Request, res: Response): Promise<void> => {
       error: null,
     });
   } catch (error) {
-    console.error("Error getting cart:", error);
+    logger.error("Error getting cart:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server error" },
@@ -81,7 +82,7 @@ export const putCart = async (req: Request, res: Response): Promise<void> => {
       error: null,
     });
   } catch (error: any) {
-    console.error("Error updating cart:", error.message);
+    logger.error("Error updating cart:", error.message);
 
     if (error.message.includes("Product with ID")) {
       res.status(404).json({
@@ -172,7 +173,7 @@ export const checkoutCart = async (
       error: null,
     });
   } catch (error) {
-    console.error("Error during checkout:", error);
+    logger.error("Error during checkout:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server Error" },

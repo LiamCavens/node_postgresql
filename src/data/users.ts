@@ -1,4 +1,5 @@
 import { AppDataSource } from "../config/data-source";
+import logger from "../utils/logger";
 import { User } from "../schemas/user.entity";
 import bcrypt from "bcrypt";
 
@@ -25,22 +26,22 @@ const users = [
 
 const seedUsers = async () => {
   try {
-    console.log("Initializing database connection...");
+    logger.info("Initializing database connection...");
     await AppDataSource.initialize();
-    console.log("Seeding users...");
-    console.log("Clearing existing users...");
+    logger.info("Seeding users...");
+    logger.info("Clearing existing users...");
     await AppDataSource.query('TRUNCATE TABLE "user" CASCADE');
 
-    console.log("Seeding users...");
+    logger.info("Seeding users...");
     const userRepository = AppDataSource.getRepository(User);
     await userRepository.save(users);
 
-    console.log("Users seeded successfully.");
+    logger.info("Users seeded successfully.");
   } catch (error) {
-    console.error("Error seeding users:", error);
+    logger.error("Error seeding users:", error);
   } finally {
     await AppDataSource.destroy();
-    console.log("Database connection closed.");
+    logger.info("Database connection closed.");
   }
 };
 

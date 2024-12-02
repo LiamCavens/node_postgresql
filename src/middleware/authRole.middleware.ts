@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import logger from "../utils/logger";
 
 export const authorizeAdmin = (
   req: Request,
@@ -26,7 +27,7 @@ export const authorizeAdmin = (
 
     next(); // Proceed if the user is an admin
   } catch (error) {
-    console.error("Authorization error:", error);
+    logger.error("Authorization error:", error);
     res.status(500).json({
       data: null,
       error: { message: "Internal Server error" },

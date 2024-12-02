@@ -1,5 +1,6 @@
 /// <reference path="../express.d.ts" />
 import { Request, Response, NextFunction } from "express";
+import logger from "../utils/logger";
 import jwt from "jsonwebtoken";
 import { User } from "../schemas/user.entity";
 import { AppDataSource } from "../config/data-source";
@@ -56,7 +57,7 @@ export const authenticate = async (
 
     next(); // Proceed to the next middleware or route handler
   } catch (error) {
-    console.error("Authentication error:", error);
+    logger.error("Authentication error:", error);
     res.status(401).json({
       data: null,
       error: { message: "Unauthorized" },

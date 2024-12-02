@@ -1,4 +1,5 @@
 import { AppDataSource } from "../config/data-source";
+import logger from "../utils/logger";
 import { Product } from "../schemas/product.entity";
 
 const products = [
@@ -17,22 +18,22 @@ const products = [
 
 const seedProducts = async () => {
   try {
-    console.log("Initializing database connection...");
+    logger.info("Initializing database connection...");
     await AppDataSource.initialize();
 
-    console.log("Clearing existing products...");
+    logger.info("Clearing existing products...");
     await AppDataSource.query('TRUNCATE TABLE "product" CASCADE');
 
-    console.log("Seeding products...");
+    logger.info("Seeding products...");
     const productRepository = AppDataSource.getRepository(Product);
     await productRepository.save(products);
 
-    console.log("Products seeded successfully.");
+    logger.info("Products seeded successfully.");
   } catch (error) {
-    console.error("Error seeding products:", error);
+    logger.error("Error seeding products:", error);
   } finally {
     await AppDataSource.destroy();
-    console.log("Database connection closed.");
+    logger.info("Database connection closed.");
   }
 };
 
